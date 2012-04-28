@@ -1,28 +1,17 @@
 <ul id="favs">
 <?php
-/* ------------------------------------------------------
- Parser de rss - by comscripts
-------------------------------------------------------- */
 
-$site = "http://feeds.delicious.com/v2/rss/pup/framit?count=15";
-$fp = @fopen($site,"r");
-while(!feof($fp)) $raw .= @fgets($fp, 4096);
-fclose($fp);
-
-if( eregi("<item>(.*)</item>", $raw, $rawitems ) ) {
- $items = explode("<item>", $rawitems[0]);
-
- for( $i = 0; $i < count($items)-1; $i++ ) {
-
-  eregi("<title>(.*)</title>",$items[$i+1], $title );
-  eregi("<description>(.*)</description>",$items[$i+1], $desc );
-
-  eregi("<link>(.*)</link>",$items[$i+1], $url );
-  
-  echo "<li><a target='_blank' title='".$desc[1]."' href=".$url[1].">&#9679;</a></li>";
-
+function get_feed_list($feed_url) {
+  $feed = simplexml_load_file($feed_url);
+  $html = '';
+  if (!$feed) { return FALSE; }
+  foreach ($feed->xpath('//item') as $item) {
+    $html .= '<li><a target="_blank" title="'.htmlspecialchars($item->description).'" href="'.htmlspecialchars($item->link).'">&#9679;</a></li>'.PHP_EOL;
   }
+  return $html;
 }
-?>
 
+echo get_feed_list('http://feeds.delicious.com/v2/rss/pup/framit?count=15');
+
+?>
 </ul>
