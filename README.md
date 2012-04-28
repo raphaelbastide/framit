@@ -2,10 +2,7 @@
 
 Framit is a basic HTML collage tool.
 
-[Try it live](http://scri.ch/ "Try scri.ch")
-
-[Demo](http://bit.ly/rthSTI "Try framit")
-
+[Try it live](http://bit.ly/rthSTI "Try framit")
 
 ## Requirements
 
@@ -14,5 +11,5 @@ Framit is a basic HTML collage tool.
 
 ## Installation
 
- * [Download scri.ch](https://github.com/bpierre/scri.ch/zipball/master)
+ * [Download framit](https://github.com/raphaelbastide/framit/zipball/master)
  * Extract the package on your server
