@@ -19,18 +19,25 @@ CONTACT : bonjour@raphaelbastide.com
 -->
 </head>
 
-<?php 
+<?php
+
+function get_or($key, $default) {
+	return (isset($_GET[$key]))? $_GET[$key] : $default;
+}
+
+
 	/*variables*/
-	$place = $_GET['place'];
-	$css = $_GET['css'];
-	$css2 = $_GET['css2'];
-	$url=$_GET['url'];
-	$rotate = $_GET['rotate'];
-	$url2= $_GET['url2'];
-	$rotate2= $_GET['rotate2'];
-	$refresh = $_GET['refresh'];
-	$refresh2 = $_GET['refresh2'];
-	
+	$place = get_or('place', '');
+	$css = get_or('css', '');
+	$css2 = get_or('css2', '');
+	$url = get_or('url', '');
+	$rotate = get_or('rotate', '');
+	$url2 = get_or('url2', '');
+	$rotate2= get_or('rotate2', '');
+	$refresh = get_or('refresh', '');
+	$refresh2 = get_or('refresh2', '');
+	$placeCSS = '';
+
 	/*Place*/
 	switch($place) {
 		case 1:
@@ -48,37 +55,37 @@ CONTACT : bonjour@raphaelbastide.com
 <body>
 
 	<?php if(isset($url)) : ?>
-	<?php 
-		echo '<iframe name="frame" id="frame" class="frame '.$placeCSS.'" src ="'.$url.'" 
+	<?php
+		echo '<iframe name="frame" id="frame" class="frame '.$placeCSS.'" src ="'.$url.'"
 					style="-moz-transform:rotate('.$rotate.');-webkit-transform:rotate('.$rotate.');'.
 					$place.';'.$css.'"';
 		if(isset($refresh) && $refresh == '1') {
 			echo ' onload="reloadIt(\'frame\')">';
-		} else { 
+		} else {
 			echo '>';
 		}
 		echo	'</iframe>';
-		
-		
+
+
 	?>
 	<?php endif; ?>
-	
+
 	<?php if(isset($url2)) : ?>
-	<?php 
-		echo '<iframe name="frame2" id="frame2" class="frame '.$placeCSS.'" src ="'.$url2.'" 
+	<?php
+		echo '<iframe name="frame2" id="frame2" class="frame '.$placeCSS.'" src ="'.$url2.'"
 					style="-moz-transform:rotate('.$rotate2.');-webkit-transform:rotate('.$rotate2.');'.
 					$place.';'.$css2.'"';
 		if(isset($refresh2) && $refresh2 == '1') {
 			echo ' onload="reloadIt(\'frame2\')">';
-		} else { 
+		} else {
 			echo '>';
 		}
 		echo	'</iframe>';
-			  
-	?> 
+
+	?>
 	<?php endif; ?>
 
-	
+
 	<label id="menu"><input id="open" type="checkbox" name="menu" value=""/> Framit</label>
 	<?php include_once 'form.php'; ?>
 
